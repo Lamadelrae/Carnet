@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Cadastro Do Contrato</title>
+
+</head>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> CADASTRO DO CONTRATO</h2>
+    
+    <!-- Icon -->
+  
+
+    <!-- Login Form -->
+    <form action="connect.php" method="post">
+      <input type="text" required id="contrato_CNPJ" name="contrato_CNPJ" class="fadeIn second"  placeholder="CNPJ DO CONTRATO">
+      <input type="text" required id="contrato_CPF" name="contrato_CPF" class="fadeIn second"  placeholder="CPF DP INVESTIDOR">
+      <input type="text" required id="numero_contrato" password  name="numero_contrato" class="fadeIn third" placeholder="NÚMERO DO CONTRATO">
+      <input type="text" required id="contrato_pdf" password  name="contrato_pdf" class="fadeIn third" placeholder="LINK PDF DO CONTRATO">
+      <input type="submit" name="register_btn" id="register_btn" class="fadeIn fourth" value="CADASTRAR">
+    </form>
+
+  
+  </div>
+</div>
+
+
+
+<script src="js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+<script src="js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){ 
+    $("#contrato_CPF").mask("999.999.999-99");
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){ 
+    $("#contrato_CNPJ").mask("99.999.999/9999-99");
+  });
+</script>
+
+
+
+
+
+
