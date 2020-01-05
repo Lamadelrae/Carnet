@@ -30,12 +30,11 @@ else{
 ?>
 <!DOCTYPE html>
 <head>   
-   <link rel="stylesheet" href="css/style_table.css">
-   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style_table.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <meta charset='utf-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Usuário: <?php echo $row["cnpj"]?></title>
-    
 </head>
 
 <body style="background-color:#ffbb38">
@@ -86,10 +85,10 @@ $result2 = mysqli_query($db, $sql2) or die ("bad query");
 </nav>
 
 
-    <div class="container">
+  <div class="container">
    <span class="navbar-text">
-    <h5>  Prezado usuário, Juros, e outras alterações em relação ao valor do empréstimo, não é representado nesta tela. </h5>
-    <a class="btn btn-success" href="<?php echo $row["boleto"] ?>" target="_blank">BOLETO</a>
+      <h5>  Prezado usuário, Juros, e outras alterações em relação ao valor do empréstimo, não é representado nesta tela. </h5>
+      <a class="btn btn-success" href="<?php echo $row["boleto"] ?>" target="_blank">BOLETO</a>
     </span>
   </div>
 
@@ -107,9 +106,8 @@ $Parcela_Status = $row["Parcela_Status"];
 $primeira_parcela_num = 1;
 
 ?>
-
 <div class="container">
-<table class="table table-striped">
+ <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Parcela Número</th>
@@ -132,6 +130,7 @@ $primeira_parcela_num = 1;
       </tr>
      <?php endwhile; ?>
   </tbody>
+
   </table>
 </div>
 </body>
@@ -141,3 +140,4 @@ $primeira_parcela_num = 1;
  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+

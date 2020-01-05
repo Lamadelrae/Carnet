@@ -23,14 +23,13 @@
  
 ?>
 
-
 <form  class ="container" action="edit.php" method="POST">
 ID PARCELA BD: 	<?php echo $row['id_parcela']; ?>
-<br>
+  <br>
 Status:
-<input type="text" name="status" id="status" value="<?php echo $row['Parcela_Status']; ?>">
-<input type="hidden" name="id" id="id" value="<?php echo $row['id_parcela']; ?>">
-<br>
-<br>
+   <input type="text" name="status" id="status" value="<?php echo $row['Parcela_Status']; ?>">
+   <input type="hidden" name="id" id="id" value="<?php echo $row['id_parcela']; ?>">
+  <br>
+  <br>
 <input type="submit" value="Editar">
 </form>
