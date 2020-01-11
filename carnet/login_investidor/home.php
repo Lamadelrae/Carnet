@@ -1,7 +1,9 @@
 <?php
   error_reporting(E_ERROR | E_WARNING | E_PARSE);
+  header('Content-Type: text/html; charset=utf-8');
 
-  $db = mysqli_connect("localhost", "root", "", "carnet");
+
+  $db = mysqli_connect("localhost", "vrcred62_ROOT", "password", "vrcred62_carnet"); 
 
   $cpf = $_POST['cpf'];
   $password = $_POST['password'];

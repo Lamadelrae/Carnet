@@ -1,7 +1,7 @@
 <?php
 //register
 
-$db = mysqli_connect("localhost", "root", "", "carnet");
+$db = mysqli_connect("localhost", "vrcred62_ROOT", "password", "vrcred62_carnet"); 
  session_start();
 
 if(isset($_POST['register_btn'])){

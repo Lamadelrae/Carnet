@@ -1,19 +1,21 @@
 <?php
+  header('Content-Type: text/html; charset=utf-8');
+
   error_reporting(E_ERROR | E_WARNING | E_PARSE);
-  $db = mysqli_connect("localhost", "root", "", "carnet");
+  $db = mysqli_connect("localhost", "vrcred62_ROOT", "password", "vrcred62_carnet"); 
 
   $cnpj = $_POST['cnpj'];
   $password = $_POST['password'];
   $cnpj2 = "00.000.000/0000-01";
-  $cnpj = stripcslashes( $cnpj);
+  $cnpj = stripcslashes($cnpj);
   $password = stripcslashes($password);
   $cnpj = mysqli_real_escape_string($db,$cnpj);
   $password = mysqli_real_escape_string($db, $password);
-  $result = mysqli_query($db, "select* from users where cnpj = '$cnpj' and password = '$password'") or die ("Error while connecting".mysqli_error($db));
+  $result = mysqli_query($db, "SELECT* FROM users WHERE cnpj = '$cnpj' AND password = '$password'") or die ("Error while connecting".mysqli_error($db));
   $row = mysqli_fetch_array($result);
 
- if ($row['cnpj']== $cnpj2){
-  header("location:SuperUsuario.php");
+ if($row['cnpj']== $cnpj2 && $row['password'] == $password){
+  header("location: superusuario.php");
 }
 else {
 
@@ -94,8 +96,7 @@ $result2 = mysqli_query($db, $sql2) or die ("bad query");
 
   <?php 
 //SELECT FOR TABLE
-$db = mysqli_connect("localhost", "root", "", "carnet");
- session_start();
+$db = mysqli_connect("localhost", "vrcred62_ROOT", "password", "vrcred62_carnet"); 
 $sql = " SELECT*  FROM users INNER JOIN status ON users.cnpj = status.cnpj WHERE status.cnpj = '$cnpj' ";
 $result = mysqli_query($db, $sql) or die ("bad query");
 $num = $row["parcelas"];

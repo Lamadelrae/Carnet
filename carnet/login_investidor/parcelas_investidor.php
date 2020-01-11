@@ -1,7 +1,7 @@
 <?php  
  $cnpj = $_GET["cnpj"];
  $cpf = $_GET['cpf'];
- $db = mysqli_connect("localhost", "root", "", "carnet");
+ $db = mysqli_connect("localhost", "vrcred62_ROOT", "password", "vrcred62_carnet"); 
 ?>
 <!DOCTYPE html>
 <head> 

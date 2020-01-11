@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Contratos</title> 
+  <meta charset='utf-8'>
   <link rel="stylesheet" href="css/style_nav.css">
   <link rel="stylesheet" href="css/style_table.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -9,7 +10,7 @@
 
 <body style="background-color:#A0A0A0;">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="SuperUsuario.php">Home</a>
+  <a class="navbar-brand" href="superusuario.php">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -53,7 +54,7 @@
       </tr>
     </thead>
     <?php
-     $db = mysqli_connect("localhost", "root", "", "carnet");
+     $db = mysqli_connect("localhost", "vrcred62_ROOT", "password", "vrcred62_carnet"); 
      $result = mysqli_query($db, "SELECT* FROM contratos") or die ("Error while connecting".mysqli_error($db));
      while ($row = $result->fetch_assoc()):
 
