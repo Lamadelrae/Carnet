@@ -33,16 +33,25 @@ class usersController extends users
 
 		if($result['username'] == $username)
 		{
+			if($result['status'] == 0)
+			{
+			 echo "Você não está autorizado a usar o sistema.";
+			}
+		   elseif($result['status'] == 1)
+		   {
+ 
 			if(password_verify($password, $result['password']))
 			{
 				session_start();
 				$_SESSION['username'] = $username;
+				$_SESSION['user_id'] = $result['id'];
 				header("Location:/projects/SGEPJ/dashboard.php");
 			}
 			else
 			{
 				echo "Password Incorrect.";
-			}	
+			}
+		   }	
 
 		}
 	  }
@@ -56,6 +65,14 @@ class usersController extends users
 			return false;
 		}
 	}
+
+	public function ModifyUser($user_id, $username, $password, $type, $status)
+	{
+		$this->UpdateUser($user_id, $username, $password, $type, $status);
+
+		header("Location:/projects/SGEPJ/edit_user.php?user_id=".$user_id."");
+	}
+
 }
 
 
@@ -129,7 +146,48 @@ class cliController extends cli
 	}
 
 	}
+
+	public function CliLogIn($cnpj, $password)
+	{
+		$count = $this->CountCli($cnpj, $password);
+
+		if($count['COUNT'] <= 0)
+		{
+			echo "No such CNPJ found";
+		}
+
+		else 
+		{
+			$result = $this->SelectOneCli($cnpj);
+
+			if($result['cnpj'] == $cnpj)
+			{
+				if(password_verify($password, $result['password']))
+				{
+					session_start();
+					$_SESSION['cnpj'] = $cnpj;
+					$_SESSION['cli_id'] = $result['id'];
+					header("Location: /projects/SGEPJ/cli_area/dashboard_cli.php");
+				}
+				else
+				{
+					echo "Password Incorrect";
+				}
+			}
+		}
+	}
 }
+
+class postsController extends posts
+{
+	public function SetPost($user_id, $title, $post)
+	{
+		$this->InsertPost($user_id, $title, $post);
+
+		header("Location:/projects/SGEPJ/news/manage_posts.php");
+	}
+}
+
 
 
 

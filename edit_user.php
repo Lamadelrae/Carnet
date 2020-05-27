@@ -11,9 +11,8 @@ $validatesesh->validatesesh($username);
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>DashBoard</title>
+	<title>Editar Usuário</title>
 </head>
 <body>
-<?php $Tiles = new cliView(); $Tiles->Tiles();?>
-<?php $News = new cliView(); $News->News();?>
+ <?php $user_id = $_GET['user_id']; $EditUser = new usersView(); $EditUser->edit_user($user_id);?>
 </body>

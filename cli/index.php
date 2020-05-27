@@ -22,17 +22,17 @@ $validatesesh->validatesesh($username);?>
 		<div class="col"></div>
 		<div class="col">
 			<form method="post" action="">
-				<input type="text" class="form-control" id="cli_name" name="cli_name" placeholder="Nome do cliente">
+				<input type="text" required class="form-control" id="cli_name" name="cli_name" placeholder="Nome do cliente">
 				<br>
-				<input type="text" class="form-control" id="cli_cnpj" name="cli_cnpj" placeholder="CNPJ do cliente">
+				<input type="text" required class="form-control" id="cli_cnpj" name="cli_cnpj" placeholder="CNPJ do cliente">
 				<br>
-				<input type="password" class="form-control" id="cli_password" name="cli_password" placeholder="Senha do cliente (poderá ser redefinida)">
+				<input type="password" required class="form-control" id="cli_password" name="cli_password" placeholder="Senha do cliente (poderá ser redefinida)">
 				<br>
-				<input type="text" class="form-control" id="cli_total_debt" name="cli_total_debt" placeholder="Valor total da Dívida">
+				<input type="text" required class="form-control" id="cli_total_debt" name="cli_total_debt" placeholder="Valor total da Dívida">
 				<br>
-				<input type="number" class="form-control" id="cli_num_quota" name="cli_num_quota" placeholder="Quantidade de parcelas">
+				<input type="number" required class="form-control" id="cli_num_quota" name="cli_num_quota" placeholder="Quantidade de parcelas">
 				<br>
-				<input type="text" class="form-control" id="cli_contract" name="cli_contract" placeholder="Contrato">
+				<input type="text" required class="form-control" id="cli_contract" name="cli_contract" placeholder="Contrato">
 				<br>
 				<button type="submit" id="submitbtn" name="submitbtn" class="btn btn-success"> Gerar Cliente <i class="fas fa-plus"></i></button>
 			</form>

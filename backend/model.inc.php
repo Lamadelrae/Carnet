@@ -64,7 +64,69 @@ class users extends db
  		  while($row = mysqli_fetch_assoc($execute)):
  		  return $row;
 		  endwhile;	
-		}	
+		}
+
+    protected function SelectAllUsers()
+	{
+		$db = $this->db();
+
+		$sql = "SELECT* FROM users WHERE status = 1";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		$data[] = array("id" => $row['id'], "username" => $row['username'], "type" => $row['type'], "status" => $row['status']);
+		endwhile;
+		return $data;
+	}
+
+	protected function SelectPendingUsers()
+	{
+		$db = $this->db();
+
+		$sql = "SELECT* FROM users WHERE status = 0 ";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		$data[] = array("id" => $row['id'], "username" => $row['username'], "type" => $row['type'], "status" => $row['status']);
+		endwhile;
+		return $data;
+	}
+
+		protected function SelectOneUser($user_id)
+	{
+		$db = $this->db();
+
+	    $user_id = mysqli_real_escape_string($db, $user_id);
+
+		$sql = "SELECT* FROM users WHERE id = $user_id ";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		$data[] = array("id" => $row['id'], "username" => $row['username'], "type" => $row['type'], "status" => $row['status']);
+		endwhile;
+		return $data;
+	}	
+
+	protected function UpdateUser($user_id, $username, $password, $type, $status)
+	{
+
+		$db = $this->db();
+
+		$user_id = mysqli_real_escape_string($db, $user_id);
+		$username = mysqli_real_escape_string($db, $username);
+		$password = mysqli_real_escape_string($db, $password);
+		$type = mysqli_real_escape_string($db, $type);
+		$status = mysqli_real_escape_string($db, $status);
+
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+		$sql = "UPDATE users SET username = '$username', password = '$hashed_password', type = '$type', status = '$status' WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+	}
 }
 
 
@@ -146,7 +208,7 @@ class cli extends db
 		$execute = mysqli_query($db, $sql);
 
 		while($row = mysqli_fetch_assoc($execute)):
-		$data[] = array("id" => $row['id'],"cli_id" => $row['cli_id'], "quota_value" => $row['quota_value'], "status" => $row['status']);
+		$data[] = array("id" => $row['id'],"cli_id" => $row['cli_id'], "quota_value" => $row['quota_value'], "status" => $row['status'], "line_quota" => $row['line_quota']);
 		endwhile;
 		return $data;
 	}
@@ -161,33 +223,193 @@ class cli extends db
 
 	}
 
-	protected function DataPoint1()
-	{
-		$db = $this->db();
+    protected function TotalCli()
+    {
+    	$db = $this->db();
 
-		$sql = "SELECT SUM(quota_value * 100 / q2.total) AS 'Total_Paid' FROM quota CROSS JOIN (SELECT SUM(quota_value) AS total FROM quota) q2 WHERE status = '100'";
+    	$sql = "SELECT COUNT(*) as 'COUNT' FROM client";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function TotalQuota()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT COUNT(*) as 'COUNT' FROM quota";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function TotalQuotaOpen()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT COUNT(*) as 'COUNT' FROM quota where status = 200";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function TotalQuotaClosed()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT COUNT(*) as 'COUNT' FROM quota where status = 100";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function ValueQuotaOpen()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT SUM(quota_value) as 'SUM' FROM quota where status = 200";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function ValueQuotaClosed()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT SUM(quota_value) as 'SUM' FROM quota where status = 100";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function TotalQuotaMora()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT COUNT(*) as 'COUNT' FROM quota where status = 300";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+    protected function ValueQuotaMora()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT SUM(quota_value) as 'SUM' FROM quota where status = 300";
+
+    	$result = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($result)):
+    	return $row;
+        endwhile;
+    }
+
+	protected function CountCli($cnpj)
+	{
+		$db  = $this->db();
+
+		$cnpj = mysqli_real_escape_string($db, $cnpj);
+
+		$sql = "SELECT COUNT(*) AS 'COUNT' FROM client WHERE cnpj = '$cnpj'";
 
 		$execute = mysqli_query($db, $sql);
 
 		while($row = mysqli_fetch_assoc($execute)):
-		$data[] = array("Total_Paid" => $row['Total_Paid']);
+		return $row;
 		endwhile;
-		return $data;
 	}
 
-	protected  function DataPoint2()
+	protected function SelectOneCli($cnpj)
 	{
 		$db = $this->db();
 
-		$sql = "SELECT SUM(quota_value * 100 / q2.total) AS 'Total_Open' FROM quota CROSS JOIN (SELECT SUM(quota_value) AS total FROM quota) q2 WHERE status = '200' OR status = '300';";
+	    $cnpj = mysqli_real_escape_string($db, $cnpj);
+
+		$sql = "SELECT* FROM client WHERE cnpj = '$cnpj' ";
 
 		$execute = mysqli_query($db, $sql);
 
 		while($row = mysqli_fetch_assoc($execute)):
-		$data[] = array("Total_Open" => $row['Total_Open']);
+		return $row;
 		endwhile;
-		return $data;
+
+		return $row;
 	}
 
 }
+
+class posts extends db
+{
+    protected function SelectPosts()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT posts.id as 'post_id', posts.title as 'post_title', posts.date as 'post_date', users.username as 'username' FROM posts JOIN users ON posts.user_id = users.id";
+
+    	$execute = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($execute)):
+    	$data[] = array("post_id" => $row['post_id'], "post_title" => $row['post_title'], "post_date" => $row['post_date'], "username" => $row['username']);
+    	endwhile;
+    	return $data;
+    }
+
+    protected function InsertPost($user_id, $title, $post)
+    {
+    	$db = $this->db();
+
+    	$user_id = mysqli_real_escape_string($db, $user_id);
+    	$title = mysqli_real_escape_string($db, $title);
+    	$post = mysqli_real_escape_string($db, $post);
+
+    	$date = gmdate("Y-m-d");
+
+    	$sql = "INSERT INTO posts(user_id, title, post, date) VALUES ('$user_id', '$title', '$post', '$date')";
+
+    	$execute = mysqli_query($db, $sql);
+    }
+
+    protected function UpdatePosts($post_id, $title, $post)
+    {
+
+    }
+
+    protected function SelectPostById($post_id)
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT* FROM posts WHERE id = '$post_id'";
+
+    	$execute = mysqli_query($db, $sql);
+
+    	while($row = mysqli_fetch_assoc($execute)):
+        $data[] = array("id" => $row['id'], "title" => $row['title'], "post" => $row['post']);
+    	endwhile;
+    	return $data;
+    }
+}
+
 ?>

@@ -26,7 +26,7 @@ include "backend/view.inc.php";
             <br>
             <input type="submit" id="submitbtn" name="submitbtn" class="btn btn-success" value="Entrar">
          </form>
-       <a class="btn btn-primary" href="cli/index.php">Área do cliente</a>
+       <a class="btn btn-primary" href="cli_area/index.php">Área do cliente</a>
        <br>
        <br>
        <a class="btn btn-primary" href="register.php">Não tem cadastro? Se cadastre aqui.</a>

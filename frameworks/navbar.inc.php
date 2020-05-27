@@ -15,18 +15,17 @@
         <a class="dropdown-item" href="/projects/SGEPJ/cli/management.php">Gerenciamento de clientes</a>
       </div>
     </li>
-        <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Financeiro</a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="/projects/SGEPJ/financial/report_1.php">Relatório de Parcelas Quitadas/Em Abertas Por Cliente</a>
-        <a class="dropdown-item" href="/projects/SGEPJ/financial/report_1.php">Relatório de Valor Quitado/Em Abertas Por Cliente</a>
-      </div>
+     <li class="nav-item">
+      <a class="nav-link" href="/projects/SGEPJ/config.php">Configurações</a>
     </li>
-        <li class="nav-item">
-      <a class="nav-link" href="#">Configurações</a>
+    <li class="nav-item">
+      <a class="nav-link" href="/projects/SGEPJ/news/manage_posts.php">Gerenciar Posts</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" href="/projects/SGEPJ/user_requests.php">User Requests</a>
     </li>
    <li class="nav-item">
-        <a class="nav-link" href="#">Usuário: <?php  echo $_SESSION['username']; ?> </a>
+        <a class="nav-link" href="#"><i class="fas fa-user"></i> Usuário: <?php  echo $_SESSION['username']; ?> </a>
       </li>
     <form method="post" action="/projects/SGEPJ/frameworks/navbar.inc.php">
       <button style="font-size:12px; position:relative; top:5px;" class="btn btn-danger" type="submit" id="logout" name="logout">Log Out</button>

@@ -1,19 +1,20 @@
 <?php
 error_reporting(E_ERROR | E_WARNING | E_PARSE); 
 session_start();
-include "frameworks/navbar.inc.php";
-include "backend/view.inc.php";
+include "../frameworks/navbar.inc.php";
+include "../backend/view.inc.php";
 
 $username = $_SESSION['username'];
 $validatesesh = new usersController();
 $validatesesh->validatesesh($username);
 ?>
-<!DOCTYPE HTML>
+
+<!DOCTYPE html>
 <html>
 <head>
-	<title>DashBoard</title>
+	<title>Editar Post</title>
 </head>
 <body>
-<?php $Tiles = new cliView(); $Tiles->Tiles();?>
-<?php $News = new cliView(); $News->News();?>
+<?php $post_id = $_GET['post_id']; $EditPost = new postsView(); $EditPost->EditPost($post_id); ?>
 </body>
+</html>

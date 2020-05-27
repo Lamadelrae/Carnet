@@ -11,9 +11,6 @@ $validatesesh->validatesesh($username);
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>DashBoard</title>
+	<title>Configurações</title>
 </head>
 <body>
-<?php $Tiles = new cliView(); $Tiles->Tiles();?>
-<?php $News = new cliView(); $News->News();?>
-</body>
