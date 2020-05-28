@@ -453,7 +453,7 @@ class postsView extends postsController
   }
 
 
-  public function EditPost($post_id)
+  public function ViewPost($post_id)
   {
    $row = $this->SelectPostById($post_id);
    
@@ -474,8 +474,8 @@ class postsView extends postsController
            <div class='card bg-light mb-3' style='width: 30rem;'>
             <div class='card-header'> <b>Editar post N°".$r['id']."</b></div>
             <div class='card-body'>
-            <h6 class='card-title'>Título: <input class='form-control' name='title' value='".$r['title']."'></h6>
-            <textarea style='height:250;' class='form-control'>".$r['post']."</textarea> 
+            <h6 class='card-title'>Título: <input required class='form-control' name='title' value='".$r['title']."'></h6>
+            <textarea required id='post' name='post' style='height:250;' class='form-control'>".$r['post']."</textarea> 
             <br>
             <br>
             <button class='btn btn-success' type='submit' name='submitbtn' id='submitbtn'>Gravar</button>
@@ -486,7 +486,38 @@ class postsView extends postsController
     <div class='col'></div> 
    </div>   
  </div>";
+    }
+
+    if(isset($_POST['submitbtn']))
+    {
+      $title = $_POST['title'];
+      $post = $_POST['post'];
+
+      $this->EditPost($post_id, $title, $post);
     } 
+  }
+
+  public function ViewAllPosts()
+  {
+    $row = $this->SelectPostsForNews();
+  foreach($row as $r)
+  {  
+    echo "
+    <div class='container'>
+ <table class='table'>
+  <thead class='thead-dark'>
+    <tr>
+      <th scope='col'> Título: ".$r['post_title']."<div class='float-right'>Feito por: ".$r['username']."</div></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope='row'><textarea style='height:200px;' readonly class='form-control'>".$r['post']."</textarea></th>
+    </tr>
+  </tbody>
+</table>
+</div>";
+}
   }
 }
 ?>

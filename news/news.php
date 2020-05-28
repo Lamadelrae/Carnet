@@ -18,3 +18,8 @@ $validatesesh->validatesesh($username);
     </li>
   </ul>
 </nav>
+
+
+<body>
+<?php $ViewAllPosts = new postsView(); $ViewAllPosts->ViewAllPosts(); ?>
+</body>

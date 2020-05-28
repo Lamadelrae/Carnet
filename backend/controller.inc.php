@@ -66,6 +66,26 @@ class usersController extends users
 		}
 	}
 
+	public function validatetype($user_id)
+	{
+		$row = $this->SelectUserType($user_id);
+
+		if($row['type'] == 2)
+		{
+			header("Location: /projects/SGEPJ/dashboard.php");
+		}
+	}
+
+	public function validatestatus($user_id)
+	{
+		$row = $this->SelectUserStatus($user_id);
+
+		if($row['status'] == '0')
+		{
+			header("Location:/projects/SGEPJ/index.php");
+		}
+	}
+
 	public function ModifyUser($user_id, $username, $password, $type, $status)
 	{
 		$this->UpdateUser($user_id, $username, $password, $type, $status);
@@ -185,6 +205,13 @@ class postsController extends posts
 		$this->InsertPost($user_id, $title, $post);
 
 		header("Location:/projects/SGEPJ/news/manage_posts.php");
+	}
+
+	public function EditPost($post_id, $title, $post)
+	{
+		 $this->UpdatePost($post_id, $title, $post);
+
+		 header("Location:/projects/SGEPJ/news/edit_post.php?post_id= ".$post_id."");
 	}
 }
 

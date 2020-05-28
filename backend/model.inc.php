@@ -127,6 +127,32 @@ class users extends db
 
 		$execute = mysqli_query($db, $sql);
 	}
+
+	protected function SelectUserType($user_id)
+	{
+		$db = $this->db();
+
+		$sql = "SELECT type FROM users WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		return $row;
+		endwhile;	
+	}
+
+		protected function SelectUserStatus($user_id)
+	{
+		$db = $this->db();
+
+		$sql = "SELECT status FROM users WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		return $row;
+		endwhile;	
+	}
 }
 
 
@@ -392,9 +418,13 @@ class posts extends db
     	$execute = mysqli_query($db, $sql);
     }
 
-    protected function UpdatePosts($post_id, $title, $post)
+    protected function UpdatePost($post_id, $title, $post)
     {
+    	$db = $this->db();
 
+    	$sql = "UPDATE posts SET title = '$title', post = '$post' WHERE id = '$post_id' ";
+
+    	$execute = mysqli_query($db, $sql);
     }
 
     protected function SelectPostById($post_id)
@@ -407,6 +437,21 @@ class posts extends db
 
     	while($row = mysqli_fetch_assoc($execute)):
         $data[] = array("id" => $row['id'], "title" => $row['title'], "post" => $row['post']);
+    	endwhile;
+    	return $data;
+    }
+
+    protected function SelectPostsForNews()
+    {
+    	$db = $this->db();
+
+    	$sql = "SELECT posts.id as 'post_id', posts.title as 'post_title', posts.post as 'post',posts.date as 'post_date', users.username as 'username' FROM posts JOIN users ON posts.user_id = users.id";
+
+    	$execute = mysqli_query($db, $sql);
+
+
+    	while($row = mysqli_fetch_assoc($execute)):
+    	$data[] = array("post_id" => $row['post_id'], "post_title" => $row['post_title'], "post" => $row['post'], "post_date" => $row['post_date'], "username" => $row['username']);
     	endwhile;
     	return $data;
     }

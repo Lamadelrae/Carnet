@@ -6,7 +6,12 @@ include "../backend/view.inc.php";
 
 $username = $_SESSION['username'];
 $validatesesh = new usersController();
-$validatesesh->validatesesh($username);?>
+$validatesesh->validatesesh($username);
+
+$user_id = $_SESSION['user_id'];
+$validatestatus = new usersController();
+$validatestatus->validatestatus($user_id);
+?>
 <br>
 <br>
 <br>
