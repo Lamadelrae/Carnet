@@ -8,12 +8,12 @@ $username = $_SESSION['username'];
 $validatesesh = new usersController();
 $validatesesh->validatesesh($username);
 
-$validatetype = new usersController();
-$validatetype->validatetype($user_id);
-
 $user_id = $_SESSION['user_id'];
 $validatestatus = new usersController();
 $validatestatus->validatestatus($user_id);
+
+$validatetype = new usersController();
+$validatetype->validatetype($user_id);
 ?>
 
 <!DOCTYPE html>

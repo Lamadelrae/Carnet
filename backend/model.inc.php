@@ -153,6 +153,46 @@ class users extends db
 		return $row;
 		endwhile;	
 	}
+
+	protected function SelectUsername($user_id)
+	{
+		$db = $this->db();
+
+		$sql = "SELECT username FROM users WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		$data[] = array( "username" => $row['username']);
+	    endwhile;
+	    return $data;
+	}
+
+	protected function UpdateUsername($user_id, $username)
+	{
+		$db = $this->db();
+
+		$username = mysqli_real_escape_string($db, $username);
+
+		$sql = "UPDATE users SET username = '$username' WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+
+	}
+
+    protected function UpdatePassword($user_id, $password)
+	{
+		$db = $this->db();
+
+		$password = mysqli_real_escape_string($db, $password);
+
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+		$sql = "UPDATE users SET password = '$hashed_password' WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+
+	}
 }
 
 

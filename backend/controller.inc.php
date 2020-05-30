@@ -93,6 +93,24 @@ class usersController extends users
 		header("Location:/projects/SGEPJ/edit_user.php?user_id=".$user_id."");
 	}
 
+	public function EditUsername($user_id, $username)
+	{
+
+	  $this->UpdateUsername($user_id, $username);
+
+	  header("Location: /projects/SGEPJ/config.php");
+
+	}
+
+    public function EditPassword($user_id, $password)
+	{
+
+	  $this->UpdatePassword($user_id, $password);
+
+	  header("Location: /projects/SGEPJ/config.php");
+
+	}
+
 }
 
 

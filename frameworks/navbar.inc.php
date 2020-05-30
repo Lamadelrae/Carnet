@@ -22,7 +22,7 @@
       <a class="nav-link" href="/projects/SGEPJ/news/manage_posts.php">Gerenciar Posts</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link" href="/projects/SGEPJ/user_requests.php">User Requests</a>
+      <a class="nav-link" href="/projects/SGEPJ/user_requests.php">Usuários</a>
     </li>
    <li class="nav-item">
         <a class="nav-link" href="#"><i class="fas fa-user"></i> Usuário: <?php  echo $_SESSION['username']; ?> </a>

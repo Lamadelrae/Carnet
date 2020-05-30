@@ -18,3 +18,5 @@ $validatestatus->validatestatus($user_id);
 	<title>Configurações</title>
 </head>
 <body>
+	<?php $UserConfig = new usersView(); $UserConfig->UserConfig($user_id); ?>
+</body>

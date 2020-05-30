@@ -85,6 +85,66 @@ class usersView extends usersController
        }
   }
 
+  public function UserConfig($user_id)
+  {
+    $row = $this->SelectUsername($user_id);
+
+
+  if(isset($_POST['submitbtn']))
+  {
+
+    $username = $_POST['username'];
+
+    $this->EditUsername($user_id, $username);  
+  }
+
+  if(isset($_POST['submitpwd']))
+  {
+
+    $password = $_POST['password'];
+
+    $this->EditPassword($user_id, $password);  
+  }
+
+    echo "<br><br><br><br><br><br><br><br>
+    <div class='container'>
+     <div class='row'>
+      <div class='col'></div>";
+
+    foreach($row as $r)
+    {
+    echo "<div class='col'>
+    <form method='post'>
+        <div class='card bg-light mb-3' style='width: 24rem;'>
+            <div class='card-header'>Editar Nome do Usuário: ".$r['username']."</div>
+            <div class='card-header'>(Após a edição do usuário, favor reiniciar o sistema)</div>
+            <div class='card-body'>
+              <input type='text' class='form-control' name='username' id='username' placeholder='UserName'>
+              <br>
+              <button class='btn btn-success' type='submit' name='submitbtn' id='submitbtn'>Gravar Novo Nome</button>
+            </div>
+       </div>
+       </form>
+   </div>";
+
+       echo "<div class='col'>
+       <form method='post'>
+        <div class='card bg-light mb-3' style='width: 24rem;'>
+            <div class='card-header'>Editar Senha do Usuário: ".$r['username']."</div>
+            <div class='card-body'>
+              <input type='text' class='form-control' name='password' id='password'>
+              <br>
+              <button class='btn btn-success' type='submit' name='submitpwd' id='submitpwd'>Gravar Nova Senha</button>
+            </div>
+       </div>
+       </form>
+   </div>";
+   }
+
+   echo "<div class='col'></div></div>";
+
+ }
+
 }
 
 class cliView extends cliController 
@@ -396,8 +456,19 @@ class postsView extends postsController
 {
   public function GetAllPosts($user_id)
   {
+
   $row = $this->SelectPosts();
-  echo "<br>
+
+  if(isset($_POST['submitbtn']))
+  {
+    $title = $_POST['title'];
+    $post = $_POST['post'];
+
+    $this->SetPost($user_id, $title, $post);
+  }
+
+  echo "
+  <br>
   <br>
   <br>
   <div class='container'> 
@@ -411,9 +482,9 @@ class postsView extends postsController
      <br>
      <button id='submitbtn' name='submitbtn' class='btn btn-success' type='submit'><i class='far fa-plus-square'></i> Postar </button>
    </form>
-   </div>
+  </div>
     <div class='col'> 
-    <table class='table'>
+     <table class='table'>
       <thead>
       <h3>Histórico de posts</h3>
         <tr>
@@ -429,26 +500,21 @@ class postsView extends postsController
       $original_date = $r['post_date'];
       $timestamp = strtotime($original_date);
       $new_date = date("d/m/Y", $timestamp);
-        echo "<tr>
-          <th scope='row'><a style='color:green;' href='edit_post.php?post_id=".$r['post_id']."'>".$r['post_id']." <i class='fas fa-arrow-right'></i></th>
-          <td>".$r['post_title']."</td>
-          <td>".$r['username']."</td>
-          <td>".$new_date."</td>
-         </tr>";
+      echo "
+      <tr>
+        <td><a style='color:green;' href='edit_post.php?post_id=".$r['post_id']."'>".$r['post_id']."<i class='fas fa-arrow-right'></i></td>
+        <td>".$r['post_title']."</td>
+        <td>".$r['username']."</td>
+        <td>".$new_date."</td>
+      </tr>";
       }
-    echo "</tbody>
+    echo "
+        </tbody>
       </table>
      </div> 
     </div>  
-  </div>  ";
+  </div>";
 
-  if(isset($_POST['submitbtn']))
-  {
-    $title = $_POST['title'];
-    $post = $_POST['post'];
-
-    $this->SetPost($user_id, $title, $post);
-  }
 
   }
 
