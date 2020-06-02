@@ -163,22 +163,24 @@ class cliView extends cliController
                     <th scope='col'>Dívida Total</th>
                     <th scope='col'>N° Parcelas</th>
                     <th scope='col'>Contrato</th>
+                    <th scope='col'>Editar</th>
                   </tr>
                 </thead>
                 <tbody>";
                 
 		foreach ($row as $r)
 		{
+      $formattedTotalDebt = number_format($r['total_debt'], 2, ",", ".");
 		     echo "
                   <tr>
                    <th></i><a style='color:red;' href='/projects/sgepj/cli/quota.php?cli_id=".$r['id']."'>#".$r['id']." <i class='fas fa-arrow-right'> </a></th>
                     <td>".$r['name']."</td>
                     <td>".$r['cnpj']."</td>
-                    <td>".$r['total_debt']."</td>
+                    <td>".$formattedTotalDebt."</td>
                     <td>".$r['num_quota']."</td>
                     <td>".$r['contract']."</td>
-                  </tr> 
-		";
+                    <td><a class='btn btn-success' href='edit_cli.php?cli_id=".$r['id']."'><i class='fas fa-edit'></i></a></td>
+                  </tr>";
 		}
 
 		echo "  </tbody>
@@ -205,11 +207,12 @@ class cliView extends cliController
               <tbody>";
         foreach ($row as $r) 
         {
+          $formattedQuotaValue = number_format($r['quota_value'], 2, ",", ".");
 
         	echo "
         	<tr>
         	  <th>".$r['line_quota']."</th>
-        	  <td>".$r['quota_value']."</td>";
+        	  <td>".$formattedQuotaValue."</td>";
         	 if($r['status'] == 100)
         	 {
         	 	echo "<td style='color:#5cb85c;'><b>Pago</b></td>";
@@ -252,11 +255,13 @@ class cliView extends cliController
       foreach ($row as $r)
       {
 
+      $formattedQuotaValue = number_format($r['quota_value'], 2, ",", ".");
+
        echo "
      <tbody>  
       <tr>
          <th scope='row'>".$r['line_quota']."</th>
-         <td>".$r['quota_value']."</td>";
+         <td>".$formattedQuotaValue."</td>";
           if($r['status'] == 100)
            {
             echo "<td style='color:#5cb85c;'><b>Pago</b></td>";
@@ -315,6 +320,12 @@ class cliView extends cliController
     $valueQuotaClosed = $this->ValueQuotaClosed();
     $valueQuotaMora = $this->ValueQuotaMora();
 
+    $formattedvalueQuotaOpen = number_format($valueQuotaOpen['SUM'], 2, ",", ".");
+
+    $formattedvalueQuotaClosed = number_format($valueQuotaClosed['SUM'], 2, ",", ".");
+
+    $formattedvalueQuotaMora = number_format($valueQuotaMora['SUM'], 2, ",", ".");
+
     echo "<div class='container float-left'>
             <br>
             <br>
@@ -365,7 +376,7 @@ class cliView extends cliController
                    <div class='card bg-light mb-3' style='max-width: 18rem;''>
                      <div class='card-header'>Valor de Parcelas em aberta</div>
                        <div class='card-body'>
-                      <h1 style='color:#f0ad4e';  class='card-text'>".$valueQuotaOpen['SUM']."</h1>
+                      <h1 style='color:#f0ad4e';  class='card-text'>".$formattedvalueQuotaOpen."</h1>
                     </div>
                   </div>
                </div>
@@ -373,7 +384,7 @@ class cliView extends cliController
                <div class='card bg-light mb-3' style='max-width: 18rem;''>
                      <div class='card-header'>Valor de parcelas Fechadas</div>
                        <div class='card-body'>
-                      <h1 style='color:#5cb85c'; class='card-text'>".$valueQuotaClosed['SUM']."</h1>
+                      <h1 style='color:#5cb85c'; class='card-text'>".$formattedvalueQuotaClosed."</h1>
                     </div>
                   </div>
                </div>
@@ -389,7 +400,7 @@ class cliView extends cliController
                <div class='card bg-light mb-3' style='max-width: 18rem;''>
                      <div class='card-header'>Valor de parcelas em Mora</div>
                        <div class='card-body'>
-                      <h1 style='color:#d9534f'; class='card-text'>".$valueQuotaMora['SUM']."</h1>
+                      <h1 style='color:#d9534f'; class='card-text'>".$formattedvalueQuotaMora."</h1>
                     </div>
                   </div>
                </div>
@@ -427,10 +438,11 @@ class cliView extends cliController
         foreach ($row as $r) 
         {
 
+          $formattedQuotaValue = number_format($r['quota_value'], 2, ",", ".");
           echo "
           <tr>
             <th>".$r['line_quota']."</th>
-            <td>".$r['quota_value']."</td>";
+            <td>".$formattedQuotaValue."</td>";
            if($r['status'] == 100)
            {
             echo "<td style='color:#5cb85c;'><b>Pago</b></td>";

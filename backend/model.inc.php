@@ -425,6 +425,20 @@ class cli extends db
 		return $row;
 	}
 
+	protected function SelectCliInfo($cli_id)
+	{
+		$db = $this->db();
+
+		$sql = "SELECT* FROM client WHERE id = '$cli_id' ";
+
+		$execute = mysqli_query($db, $sql);
+
+		while($row = mysqli_fetch_assoc($execute)):
+		$data[] = array("id"=>$row['id'], "name"=>$row['name'], "cnpj"=>$row['cnpj'], "total_debt"=>$row['total_debt'], "num_quota"=>$row['num_quota'], "contract"=>$row['contract']);	
+		endwhile;
+		return $data;
+	}
+
 }
 
 class posts extends db
