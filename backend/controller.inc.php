@@ -224,8 +224,15 @@ class cliController extends cli
 
 	public function SetNewInfo($cli_id, $name, $password, $cnpj, $contract)
 	{
-		$this->UpdateCliInfo($cli_id, $name, $password, $cnpj, $contract);
-
+		if(strlen($password) >= 1 )
+		{
+		    $this->UpdateCliInfo($cli_id, $name, $password, $cnpj, $contract);
+	    }
+	    elseif(strlen($password) <= 0)
+	    {
+	    	$this->UpdateCliInfoNoPass($cli_id, $name, $cnpj, $contract);
+	    }
+	    
 		header("Location:/projects/SGEPJ/cli/edit_cli.php?cli_id=".$cli_id."");
 	}
 }

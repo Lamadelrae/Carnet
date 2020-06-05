@@ -475,6 +475,22 @@ class cli extends db
 
 	}
 
+	protected function UpdateCliInfoNoPass($cli_id, $name, $cnpj, $contract)
+	{
+		$db = $this->db();
+
+		$cli_id = mysqli_real_escape_string($db, $cli_id);
+		$name = mysqli_real_escape_string($db, $name);
+		$cnpj = mysqli_real_escape_string($db, $cnpj);
+		$contract = mysqli_real_escape_string($db, $contract);
+
+
+		$sql = "UPDATE client SET name = '$name', cnpj = '$cnpj', contract = '$contract' WHERE id = '$cli_id' ";
+
+		$execute = mysqli_query($db, $sql); 
+
+	}
+
 }
 
 class posts extends db
