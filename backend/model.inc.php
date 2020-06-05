@@ -128,6 +128,22 @@ class users extends db
 		$execute = mysqli_query($db, $sql);
 	}
 
+
+   protected function UpdateUserNoPass($user_id, $username, $type, $status)
+	{
+
+		$db = $this->db();
+
+		$user_id = mysqli_real_escape_string($db, $user_id);
+		$username = mysqli_real_escape_string($db, $username);
+		$type = mysqli_real_escape_string($db, $type);
+		$status = mysqli_real_escape_string($db, $status);
+
+		$sql = "UPDATE users SET username = '$username', type = '$type', status = '$status' WHERE id = '$user_id' ";
+
+		$execute = mysqli_query($db, $sql);
+	}
+
 	protected function SelectUserType($user_id)
 	{
 		$db = $this->db();
@@ -429,6 +445,8 @@ class cli extends db
 	{
 		$db = $this->db();
 
+	    $cli_id = mysqli_real_escape_string($db, $cli_id);
+
 		$sql = "SELECT* FROM client WHERE id = '$cli_id' ";
 
 		$execute = mysqli_query($db, $sql);
@@ -439,6 +457,24 @@ class cli extends db
 		return $data;
 	}
 
+	protected function UpdateCliInfo($cli_id, $name, $password, $cnpj, $contract)
+	{
+		$db = $this->db();
+
+		$cli_id = mysqli_real_escape_string($db, $cli_id);
+		$name = mysqli_real_escape_string($db, $name);
+		$password = mysqli_real_escape_string($db, $password);
+		$cnpj = mysqli_real_escape_string($db, $cnpj);
+		$contract = mysqli_real_escape_string($db, $contract);
+
+		$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+		$sql = "UPDATE client SET name = '$name', cnpj = '$cnpj', password = '$hashed_password', contract = '$contract' WHERE id = '$cli_id' ";
+
+		$execute = mysqli_query($db, $sql); 
+
+	}
+
 }
 
 class posts extends db
@@ -447,7 +483,7 @@ class posts extends db
     {
     	$db = $this->db();
 
-    	$sql = "SELECT posts.id as 'post_id', posts.title as 'post_title', posts.date as 'post_date', users.username as 'username' FROM posts JOIN users ON posts.user_id = users.id";
+    	$sql = "SELECT posts.id as 'post_id', posts.title as 'post_title', posts.date as 'post_date', users.username as 'username' FROM posts JOIN users ON posts.user_id = users.id ";
 
     	$execute = mysqli_query($db, $sql);
 
@@ -499,7 +535,7 @@ class posts extends db
     {
     	$db = $this->db();
 
-    	$sql = "SELECT posts.id as 'post_id', posts.title as 'post_title', posts.post as 'post',posts.date as 'post_date', users.username as 'username' FROM posts JOIN users ON posts.user_id = users.id";
+    	$sql = "SELECT posts.id as 'post_id', posts.title as 'post_title', posts.post as 'post',posts.date as 'post_date', users.username as 'username' FROM posts JOIN users ON posts.user_id = users.id order by post_id desc";
 
     	$execute = mysqli_query($db, $sql);
 

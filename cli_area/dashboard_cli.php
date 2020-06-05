@@ -17,6 +17,14 @@ $validatesesh->validatesesh($cnpj);
 </head>
 <br>
 <body>
-<?php $CliQuotaCliArea = new cliView(); $CliQuotaCliArea->CliQuotaCliArea($cli_id);  ?>
+	<div class='container'>
+		<div class='row'>
+			<div class='col'><?php $CliQuotaCliArea = new cliView(); $CliQuotaCliArea->CliQuotaCliArea($cli_id); ?></div>
+			<div class='col'>
+				<h4> Posts: </h4>
+				<?php $ViewPosts = new postsView(); $ViewPosts->ViewAllPosts();?>	
+			</div>
+		</div>	
+	</div>
 </body>
 </html>

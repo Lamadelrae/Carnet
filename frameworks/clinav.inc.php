@@ -9,9 +9,6 @@
       <a class="nav-link" href="/projects/SGEPJ/cli_area/dashboard_cli.php">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Configurações</a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link" href="#">Usuário: <?php  echo $_SESSION['cnpj']; ?> </a>
       </li>
     <form method="post" action="/projects/SGEPJ/frameworks/navbar.inc.php">

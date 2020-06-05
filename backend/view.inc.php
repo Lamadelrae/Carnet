@@ -69,7 +69,7 @@ class usersView extends usersController
      $row = $this->SelectOneUser($user_id);  
      foreach($row as $r)
      {
-         echo "<br>\n<br>\n<br>\n<br>\n<br>\n<br>\n<br>\n<div class='container'>\n<div class='row'>\n<div class='col'></div>\n<div class='col'>\n<div class='card bg-light mb-3' style='width: 25rem;'>\n<div class='card-header'>Editar Informações do Usuário: <b>".$r['username']."</b></div>\n<div class='card-body'>\n<form method='post'>\n<input required class='form-control' name='username' id='username' placeholder='Username' value='".$r['username']."'>\n<br>\n<input required type='password' class='form-control' name='password' id='password' placeholder='Senha'>\n<br>Permissão:\n<input hidden checked type='radio' name='type' id='type' value='".$r['type']."'> \n<input type='radio' name='type' id='type' value='1'> Super Admin \n<input type='radio' name='type' id='type' value='2'> Usuário Normal\n<br>\n<br>Autorização:\n<input hidden checked type='radio' name='status' id='status' value='".$r['status']."'> \n<input type='radio' name='status' id='status' value='0'> <b style='color:red;'>Desautorizar</b>\n<input type='radio' name='status' id='status' value='1'> <b style='color:green;'>Autorizar</b>\n<br>\n<br>\n<button id='submitbtn' name='submitbtn' class='btn btn-success' type='submit'>Gravar</button>\n</form>\n</div>\n</div> \n</div>\n<div class='col'></div>\n</div> \n</div>";
+         echo "<br>\n<br>\n<br>\n<br>\n<br>\n<br>\n<br>\n<div class='container'>\n<div class='row'>\n<div class='col'></div>\n<div class='col'>\n<div class='card bg-light mb-3' style='width: 25rem;'>\n<div class='card-header'>Editar Informações do Usuário: <b>".$r['username']."</b></div>\n<div class='card-body'>\n<form method='post'>\n<input required class='form-control' name='username' id='username' placeholder='Username' value='".$r['username']."'>\n<br>\n<input type='password' class='form-control' name='password' id='password' placeholder='Senha'>\n<br>Permissão:\n<input hidden checked type='radio' name='type' id='type' value='".$r['type']."'> \n<input type='radio' name='type' id='type' value='1'> Super Admin \n<input type='radio' name='type' id='type' value='2'> Usuário Normal\n<br>\n<br>Autorização:\n<input hidden checked type='radio' name='status' id='status' value='".$r['status']."'> \n<input type='radio' name='status' id='status' value='0'> <b style='color:red;'>Desautorizar</b>\n<input type='radio' name='status' id='status' value='1'> <b style='color:green;'>Autorizar</b>\n<br>\n<br>\n<button id='submitbtn' name='submitbtn' class='btn btn-success' type='submit'>Gravar</button>\n</form>\n</div>\n</div> \n</div>\n<div class='col'></div>\n</div> \n</div>";
 
        }
 
@@ -231,6 +231,66 @@ class cliView extends cliController
          </table>
        </div>";
 	}
+
+  public function CliInformation($cli_id)
+  {
+    $row = $this->SelectCliInfo($cli_id);
+
+    if(isset($_POST['submitbtn']))
+    {
+      $name = $_POST['name'];
+      $password = $_POST['password'];
+      $cnpj = $_POST['cnpj'];
+      $contract = $_POST['contract'];
+
+      $this->SetNewInfo($cli_id, $name, $password, $cnpj, $contract);
+    }
+
+    foreach($row as $r)
+    {
+      echo "<br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+              <div class='container'>
+              <div class='row'>
+               <div class='col'></div>
+                <div class='col'>
+                  <div class='card bg-light mb-3' style='width: 25rem;''>
+                    <div class='card-header'>Edtiar Informações do cliente: ".$r['name']."</div>
+                    <form method='post'>
+                     <div class='card-body'>
+                      <input class='form-control' name='name' id='name' placeholder='Nome' value='".$r['name']."'>
+                      <br>
+                      <input class='form-control' name='password' id='password' placeholder='Senha'>
+                      <br>
+                      <input class='form-control' name='cnpj' id='cnpj' placeholder='CNPJ' value='".$r['cnpj']."'>
+                      <br>
+                      <input class='form-control' name='contract' id='contract' placeholder='Contrato' value='".$r['contract']."'>
+                      <br>
+                      <button class='btn btn-success' name='submitbtn' id='submitbtn' type='submit'>Gravar</button>
+                     </div>
+                   </form>  
+                    </div>
+                   </div> 
+                  <div class='col'></div>   
+                 </div>
+             </div>";
+    }
+
+    echo "<script src='../frameworks/jquery.mask.js'></script>
+     <script type='text/javascript'>
+      $(document).ready(function(){
+        $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
+        });
+      </script>";
+
+  }
 
   public function CliOneQuota($quota_id)
   {

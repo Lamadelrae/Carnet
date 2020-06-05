@@ -15,9 +15,9 @@ $validatestatus->validatestatus($user_id);
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Edit Cli</title>
+	<title>Editar Cliente</title>
 </head>
 <body>
-
+<?php $cli_id = $_GET['cli_id']; $SelectCliInfo = new cliView(); $SelectCliInfo->CliInformation($cli_id); ?>
 </body>
 </html>

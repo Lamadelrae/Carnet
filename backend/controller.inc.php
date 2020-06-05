@@ -88,7 +88,14 @@ class usersController extends users
 
 	public function ModifyUser($user_id, $username, $password, $type, $status)
 	{
-		$this->UpdateUser($user_id, $username, $password, $type, $status);
+		if(strlen($password) >= 1)
+		{
+		   $this->UpdateUser($user_id, $username, $password, $type, $status);
+	    }
+	    elseif(strlen($password <= 0)) 
+	    {
+	       $this->UpdateUserNoPass($user_id, $username, $type, $status);
+	    }
 
 		header("Location:/projects/SGEPJ/edit_user.php?user_id=".$user_id."");
 	}
@@ -213,6 +220,13 @@ class cliController extends cli
 				}
 			}
 		}
+	}
+
+	public function SetNewInfo($cli_id, $name, $password, $cnpj, $contract)
+	{
+		$this->UpdateCliInfo($cli_id, $name, $password, $cnpj, $contract);
+
+		header("Location:/projects/SGEPJ/cli/edit_cli.php?cli_id=".$cli_id."");
 	}
 }
 
