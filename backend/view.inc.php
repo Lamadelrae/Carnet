@@ -26,7 +26,7 @@ class usersView extends usersController
       foreach ($row as $r ) 
         {
         echo "
-          <tr>
+        <tr>
             <th scope='row'>".$r['id']."</th>
             <td>".$r['username']."</td>
             <td>".$r['type']."</td>
