@@ -5,7 +5,6 @@ class usersView extends usersController
 {
   public function user_requests()
   {
-
     $row = $this->SelectAllUsers();
     $rowP = $this->SelectPendingUsers();
 
@@ -88,6 +87,7 @@ class usersView extends usersController
   public function UserConfig($user_id)
   {
     $row = $this->SelectUsername($user_id);
+
 
 
   if(isset($_POST['submitbtn']))
@@ -278,7 +278,22 @@ class cliView extends cliController
                    </form>  
                     </div>
                    </div> 
-                  <div class='col'></div>   
+                  <div class='col'>
+                       <div class='card bg-light mb-3' style='max-width: 18rem;'>
+                        <div class='card-header'>Re-calcular Empréstimo do cliente: ".$r['name']."</div>
+                         <div class='card-body'>
+                            <form method='post'>
+                             <div class='card-body'>
+                              <input required class='form-control' id='total_debt' name='total_debt' placeholder='Dívida Total'>
+                              <br>
+                              <input required type='number' class='form-control' id='num_quota' name='num_quota' placeholder='Número Parcelas'>
+                              <br>
+                              <button class='btn btn-success' name='calcbtn'>Calcular</button>
+                             </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>   
                  </div>
              </div>";
     }
@@ -287,6 +302,7 @@ class cliView extends cliController
      <script type='text/javascript'>
       $(document).ready(function(){
         $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
+        $('#total_debt').mask('#.##0,00', {reverse: true});
         });
       </script>";
 

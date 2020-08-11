@@ -491,6 +491,28 @@ class cli extends db
 
 	}
 
+	protected function DeleteOldQuota($cli_id)
+	{
+		$db = $this->db();
+
+		$cli_id = mysqli_real_escape_string($db, $cli_id);
+
+		$sql = "DELETE FROM quota WHERE id = '$cli_id'";
+
+		$execute = mysqli_query($db, $sql);
+	}
+
+	protected function UpdateCalcInfo($cli_id, $total_debt, $num_quota)
+	{
+		$db = $this->db();
+
+		$cli_id = mysqli_real_escape_string($db, $cli_id);
+		$total_debt = mysqli_real_escape_string($db, $total_debt);
+		$num_quota = mysqli_real_escape_string($db, $num_quota);
+
+		$sql = "UPDATE client SET ";
+	}
+
 }
 
 class posts extends db

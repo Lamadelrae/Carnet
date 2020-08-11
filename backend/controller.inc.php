@@ -144,6 +144,19 @@ class cliController extends cli
 			header("Refresh:0");
 	}
 
+	public function ReCalculateCli($cli_id, $total_debt, $num_quota)
+	{
+		$this->DeleteOldQuota($cli_id);
+
+		$quota_value = $total_debt/$num_quota;
+
+		for($line_quota = 1; $line_quota <= $num_quota; $line_quota++)
+		{
+		    $this->InsertQuota($cli_id, $quota_value, $line_quota);
+		}
+		
+	}
+
 
 	public function setQuota($cli_id, $status, $quota_id)
 	{
