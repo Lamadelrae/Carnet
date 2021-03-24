@@ -154,7 +154,8 @@ class cliController extends cli
 		{
 		    $this->InsertQuota($cli_id, $quota_value, $line_quota);
 		}
-		
+
+		$this->UpdateCalcInfo($cli_id, $total_debt, $num_quota);
 	}
 
 

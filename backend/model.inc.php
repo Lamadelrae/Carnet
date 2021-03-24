@@ -497,7 +497,7 @@ class cli extends db
 
 		$cli_id = mysqli_real_escape_string($db, $cli_id);
 
-		$sql = "DELETE FROM quota WHERE id = '$cli_id'";
+		$sql = "DELETE FROM quota WHERE cli_id = '$cli_id'";
 
 		$execute = mysqli_query($db, $sql);
 	}
@@ -510,7 +510,9 @@ class cli extends db
 		$total_debt = mysqli_real_escape_string($db, $total_debt);
 		$num_quota = mysqli_real_escape_string($db, $num_quota);
 
-		$sql = "UPDATE client SET ";
+		$sql = "UPDATE client SET total_debt = '$total_debt', num_quota = '$num_quota' WHERE id = '$cli_id'";
+
+		$execute = mysqli_query($db, $sql);
 	}
 
 }

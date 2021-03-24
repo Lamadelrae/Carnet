@@ -245,6 +245,14 @@ class cliView extends cliController
       $this->SetNewInfo($cli_id, $name, $password, $cnpj, $contract);
     }
 
+    if(isset($_POST["calcbtn"]))
+    {
+      $total_debt = $_POST["total_debt"];
+      $num_quota = $_POST["num_quota"];
+      
+      $this->ReCalculateCli($cli_id, $total_debt, $num_quota);
+    }
+
     foreach($row as $r)
     {
       echo "<br>
